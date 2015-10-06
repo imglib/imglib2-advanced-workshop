@@ -1,6 +1,8 @@
 package t2views.completed;
 
 import static t1copy.completed.CopyExample2.copy;
+import io.scif.img.IO;
+import io.scif.img.ImgIOException;
 import net.imglib2.IterableInterval;
 import net.imglib2.RandomAccessible;
 import net.imglib2.RandomAccessibleInterval;
@@ -8,8 +10,6 @@ import net.imglib2.img.Img;
 import net.imglib2.img.ImgFactory;
 import net.imglib2.img.array.ArrayImgFactory;
 import net.imglib2.img.display.imagej.ImageJFunctions;
-import net.imglib2.io.ImgIOException;
-import net.imglib2.io.ImgOpener;
 import net.imglib2.type.NativeType;
 import net.imglib2.type.numeric.NumericType;
 import net.imglib2.type.numeric.integer.UnsignedByteType;
@@ -53,7 +53,7 @@ public class ViewsExample1< T extends NativeType< T > & NumericType< T >>
 		final ViewsExample1< UnsignedByteType > v = new ViewsExample1< UnsignedByteType >( 400, 300, backgroundValue, axisValue );
 
 		final ImgFactory< UnsignedByteType > factory = new ArrayImgFactory< UnsignedByteType >();
-		final Img< UnsignedByteType > img = new ImgOpener().openImg( "images/imglib2-logo-gray-70x80-b.tif", factory, new UnsignedByteType() );
+		final Img< UnsignedByteType > img = IO.openImgs( "images/imglib2-logo-gray-70x80-b.tif", factory, new UnsignedByteType() ).get( 0 ).getImg();
 		v.example( img );
 	}
 
