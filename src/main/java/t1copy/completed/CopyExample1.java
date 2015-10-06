@@ -42,6 +42,8 @@ public class CopyExample1
 		copy( input, output );
 
 		// show output
-		ImageJFunctions.show( output );
+		final ImagePlus imp = ImageJFunctions.show( output );
+		imp.getProcessor().resetMinAndMax();
+		imp.updateAndRepaintWindow();
 	}
 }
