@@ -1,18 +1,17 @@
 package t6converters;
 
+import io.scif.img.ImgIOException;
+import io.scif.img.ImgOpener;
+
 import net.imglib2.RandomAccessibleInterval;
+import net.imglib2.converter.ChannelARGBConverter;
+import net.imglib2.converter.ChannelARGBConverter.Channel;
 import net.imglib2.converter.Converter;
 import net.imglib2.converter.Converters;
-import net.imglib2.display.ChannelARGBConverter;
-import net.imglib2.display.ChannelARGBConverter.Channel;
-import net.imglib2.display.RealFloatConverter;
 import net.imglib2.img.array.ArrayImgFactory;
 import net.imglib2.img.display.imagej.ImageJFunctions;
-import net.imglib2.io.ImgIOException;
-import net.imglib2.io.ImgOpener;
 import net.imglib2.type.numeric.ARGBType;
 import net.imglib2.type.numeric.integer.UnsignedByteType;
-import net.imglib2.type.numeric.real.FloatType;
 
 public class ConverterExample1
 {

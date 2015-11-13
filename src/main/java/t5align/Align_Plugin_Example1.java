@@ -4,15 +4,11 @@ import fiji.util.gui.GenericDialogPlus;
 import ij.IJ;
 import ij.ImagePlus;
 import ij.plugin.PlugIn;
-import net.imglib2.RandomAccessible;
+
 import net.imglib2.RandomAccessibleInterval;
 import net.imglib2.img.array.ArrayImgFactory;
-import net.imglib2.img.display.imagej.ImageJFunctions;
-import net.imglib2.interpolation.randomaccess.NLinearInterpolatorFactory;
 import net.imglib2.realtransform.AffineTransform;
-import net.imglib2.realtransform.RealViews;
 import net.imglib2.type.numeric.real.FloatType;
-import net.imglib2.view.Views;
 
 public class Align_Plugin_Example1 implements PlugIn
 {

@@ -1,13 +1,14 @@
 package t6converters.completed;
 
+import io.scif.img.ImgIOException;
+import io.scif.img.ImgOpener;
+
 import net.imglib2.RandomAccessibleInterval;
 import net.imglib2.converter.Converter;
 import net.imglib2.converter.Converters;
-import net.imglib2.display.RealFloatConverter;
+import net.imglib2.converter.RealFloatConverter;
 import net.imglib2.img.array.ArrayImgFactory;
 import net.imglib2.img.display.imagej.ImageJFunctions;
-import net.imglib2.io.ImgIOException;
-import net.imglib2.io.ImgOpener;
 import net.imglib2.type.numeric.integer.UnsignedByteType;
 import net.imglib2.type.numeric.real.FloatType;
 

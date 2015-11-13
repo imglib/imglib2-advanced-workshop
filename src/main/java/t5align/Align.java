@@ -2,6 +2,8 @@ package t5align;
 
 import static t3gradient.completed.GradientExample2.gradients;
 import static t4realviews.completed.RealViewsExample3.computeDifference;
+import Jama.Matrix;
+
 import net.imglib2.Cursor;
 import net.imglib2.RandomAccess;
 import net.imglib2.RandomAccessibleInterval;
@@ -14,7 +16,6 @@ import net.imglib2.type.numeric.RealType;
 import net.imglib2.util.LinAlgHelpers;
 import net.imglib2.util.Util;
 import net.imglib2.view.Views;
-import Jama.Matrix;
 
 public class Align< T extends RealType<T> >
 {

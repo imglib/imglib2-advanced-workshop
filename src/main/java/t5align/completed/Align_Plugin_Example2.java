@@ -1,10 +1,10 @@
 package t5align.completed;
 
-import t5align.Align;
 import fiji.util.gui.GenericDialogPlus;
 import ij.IJ;
 import ij.ImagePlus;
 import ij.plugin.PlugIn;
+
 import net.imglib2.Interval;
 import net.imglib2.RandomAccessibleInterval;
 import net.imglib2.img.Img;
@@ -16,6 +16,8 @@ import net.imglib2.realtransform.RealViews;
 import net.imglib2.type.numeric.NumericType;
 import net.imglib2.type.numeric.real.FloatType;
 import net.imglib2.view.Views;
+
+import t5align.Align;
 
 public class Align_Plugin_Example2 implements PlugIn
 {

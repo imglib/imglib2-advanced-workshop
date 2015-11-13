@@ -2,13 +2,13 @@ package t2views;
 
 import io.scif.img.IO;
 import io.scif.img.ImgIOException;
+
 import net.imglib2.RandomAccessibleInterval;
 import net.imglib2.img.Img;
 import net.imglib2.img.ImgFactory;
 import net.imglib2.img.array.ArrayImgFactory;
 import net.imglib2.img.display.imagej.ImageJFunctions;
 import net.imglib2.type.numeric.integer.UnsignedByteType;
-import net.imglib2.view.Views;
 
 public class ViewsExample2Alternative
 {

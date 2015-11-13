@@ -4,17 +4,13 @@ import java.util.Arrays;
 import java.util.List;
 
 import net.imglib2.Interval;
+import net.imglib2.KDTree;
 import net.imglib2.RandomAccessibleInterval;
 import net.imglib2.RealPoint;
 import net.imglib2.RealRandomAccessible;
-import net.imglib2.collection.KDTree;
-import net.imglib2.img.display.imagej.ImageJFunctions;
-import net.imglib2.interpolation.neighborsearch.NearestNeighborInterpolatorFactory;
 import net.imglib2.neighborsearch.NearestNeighborSearch;
-import net.imglib2.neighborsearch.NearestNeighborSearchOnKDTree;
 import net.imglib2.type.numeric.ARGBType;
 import net.imglib2.util.Intervals;
-import net.imglib2.view.Views;
 
 public class SparseExample1
 {

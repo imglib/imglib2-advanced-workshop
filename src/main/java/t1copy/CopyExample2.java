@@ -3,16 +3,14 @@ package t1copy;
 import ij.ImagePlus;
 import io.scif.img.IO;
 import io.scif.img.ImgIOException;
+
 import net.imglib2.Cursor;
 import net.imglib2.Dimensions;
-import net.imglib2.IterableInterval;
 import net.imglib2.RandomAccess;
-import net.imglib2.RandomAccessible;
 import net.imglib2.img.Img;
 import net.imglib2.img.ImgFactory;
 import net.imglib2.img.array.ArrayImgFactory;
 import net.imglib2.img.display.imagej.ImageJFunctions;
-import net.imglib2.type.Type;
 import net.imglib2.type.numeric.real.FloatType;
 
 public class CopyExample2

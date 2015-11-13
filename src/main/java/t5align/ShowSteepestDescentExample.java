@@ -1,11 +1,12 @@
 package t5align;
 
 import ij.ImageJ;
-import net.imglib2.img.ImgPlus;
+import io.scif.img.ImgIOException;
+import io.scif.img.ImgOpener;
+
+import net.imagej.ImgPlus;
 import net.imglib2.img.array.ArrayImgFactory;
 import net.imglib2.img.display.imagej.ImageJFunctions;
-import net.imglib2.io.ImgIOException;
-import net.imglib2.io.ImgOpener;
 import net.imglib2.type.numeric.real.FloatType;
 
 public class ShowSteepestDescentExample

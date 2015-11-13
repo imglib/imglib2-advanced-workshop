@@ -3,6 +3,7 @@ package t2views.completed;
 import static t1copy.completed.CopyExample2.copy;
 import io.scif.img.IO;
 import io.scif.img.ImgIOException;
+
 import net.imglib2.IterableInterval;
 import net.imglib2.RandomAccessible;
 import net.imglib2.RandomAccessibleInterval;

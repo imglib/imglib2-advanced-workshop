@@ -3,9 +3,8 @@ package t1copy;
 import ij.ImagePlus;
 import io.scif.img.IO;
 import io.scif.img.ImgIOException;
-import net.imglib2.Cursor;
+
 import net.imglib2.Dimensions;
-import net.imglib2.RandomAccess;
 import net.imglib2.img.Img;
 import net.imglib2.img.ImgFactory;
 import net.imglib2.img.array.ArrayImgFactory;
