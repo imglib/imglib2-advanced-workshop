@@ -84,10 +84,8 @@ public class ViewsExample1< T extends NativeType< T > & NumericType< T >>
 		final Img< T > outputImg = factory.create( new long[] { displayWidth, displayHeight }, backgroundValue );
 		final RandomAccessibleInterval< T > output = Views.translate( outputImg, -displayWidth / 2, -displayHeight / 2 );
 		copy( img, Views.iterable( output ) );
-		for ( final T t : Views.iterable( Views.interval( output, Intervals.createMinMax( -10, 0, 10, 0 ) ) ) )
-			t.set( axisValue );
-		for ( final T t : Views.iterable( Views.interval( output, Intervals.createMinMax( 0, -10, 0, 10 ) ) ) )
-			t.set( axisValue );
+		Views.iterable( Views.interval( output, Intervals.createMinMax( -10, 0, 10, 0 ) ) ).forEach( t -> t.set( axisValue ) );
+		Views.iterable( Views.interval( output, Intervals.createMinMax( 0, -10, 0, 10 ) ) ).forEach( t -> t.set( axisValue ) );
 		ImageJFunctions.show( output, name );
 	}
 }
