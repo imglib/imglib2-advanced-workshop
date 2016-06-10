@@ -31,7 +31,7 @@ public class CopyExample1
 		// load input image
 		final String filename = "images/bee-1.tif";
 		final FloatType type = new FloatType();
-		final ImgFactory< FloatType > factory = new ArrayImgFactory< FloatType >();
+		final ImgFactory< FloatType > factory = new ArrayImgFactory<>();
 		final Img< FloatType > input = IO.openImgs( filename, factory, type ).get( 0 ).getImg();
 
 		// create output image to hold a copy of the input image

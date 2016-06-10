@@ -44,7 +44,7 @@ public class Align_Plugin_Example2 implements PlugIn
 			return;
 		}
 
-		Align< FloatType > align = new Align< FloatType >( template, new ArrayImgFactory< FloatType >() );
+		Align< FloatType > align = new Align<>( template, new ArrayImgFactory<>() );
 		AffineTransform transform = align.align( image, maxIterations, minParameterChange );
 
 		// TODO:

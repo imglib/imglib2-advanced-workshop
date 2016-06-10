@@ -39,7 +39,7 @@ public class RealViewsExample3
 			final RandomAccessible< T > target,
 			final RandomAccessibleInterval< T > difference )
 	{
-		final RealRandomAccessible< T > interpolated = Views.interpolate( source, new NLinearInterpolatorFactory< T >() );
+		final RealRandomAccessible< T > interpolated = Views.interpolate( source, new NLinearInterpolatorFactory<>() );
 		final RandomAccessible< T > warped = RealViews.affine( interpolated, transform );
 
 		final Cursor< T > cw = Views.flatIterable( Views.interval( warped, difference ) ).cursor();

@@ -20,7 +20,7 @@ public class RealViewsExample1
 {
 	public static void main( final String[] args ) throws ImgIOException
 	{
-		final Img< FloatType > img = IO.openImgs( "images/bee-1.tif", new ArrayImgFactory< FloatType >(), new FloatType() ).get( 0 ).getImg();
+		final Img< FloatType > img = IO.openImgs( "images/bee-1.tif", new ArrayImgFactory<>(), new FloatType() ).get( 0 ).getImg();
 		System.out.println( Util.printInterval( img ) );
 
 		// TODO: try the different InterpolatorFactories

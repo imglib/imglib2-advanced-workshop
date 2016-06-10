@@ -20,7 +20,7 @@ public class ConvertersExample2
 		ArrayImgFactory< UnsignedByteType > factory = new ArrayImgFactory<>();
 		RandomAccessibleInterval< UnsignedByteType > img = IO.openImgs( "images/bee-1.tif", factory, type ).get( 0 ).getImg();
 
-		Converter< UnsignedByteType, FloatType > c = new RealFloatConverter< UnsignedByteType >();
+		Converter< UnsignedByteType, FloatType > c = new RealFloatConverter<>();
 		RandomAccessibleInterval< FloatType > view = Converters.convert( img, c, new FloatType() );
 		ImageJFunctions.show( view );
 

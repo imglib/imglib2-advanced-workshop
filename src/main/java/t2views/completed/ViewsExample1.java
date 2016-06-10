@@ -51,9 +51,9 @@ public class ViewsExample1< T extends NativeType< T > & NumericType< T >>
 	{
 		final UnsignedByteType backgroundValue = new UnsignedByteType( 128 );
 		final UnsignedByteType axisValue = new UnsignedByteType( 0 );
-		final ViewsExample1< UnsignedByteType > v = new ViewsExample1< UnsignedByteType >( 400, 300, backgroundValue, axisValue );
+		final ViewsExample1< UnsignedByteType > v = new ViewsExample1<>( 400, 300, backgroundValue, axisValue );
 
-		final ImgFactory< UnsignedByteType > factory = new ArrayImgFactory< UnsignedByteType >();
+		final ImgFactory< UnsignedByteType > factory = new ArrayImgFactory<>();
 		final Img< UnsignedByteType > img = IO.openImgs( "images/imglib2-logo-gray-70x80-b.tif", factory, new UnsignedByteType() ).get( 0 ).getImg();
 		v.example( img );
 	}
@@ -80,7 +80,7 @@ public class ViewsExample1< T extends NativeType< T > & NumericType< T >>
 	{
 		assert img.numDimensions() == 2;
 
-		final ImgFactory< T > factory = new ArrayImgFactory< T >();
+		final ImgFactory< T > factory = new ArrayImgFactory<>();
 		final Img< T > outputImg = factory.create( new long[] { displayWidth, displayHeight }, backgroundValue );
 		final RandomAccessibleInterval< T > output = Views.translate( outputImg, -displayWidth / 2, -displayHeight / 2 );
 		copy( img, Views.iterable( output ) );

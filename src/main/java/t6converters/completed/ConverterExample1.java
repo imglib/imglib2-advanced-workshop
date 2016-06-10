@@ -28,7 +28,7 @@ public class ConverterExample1
 		RandomAccessibleInterval< ARGBType > view1 = Converters.convert( img, c1, new ARGBType() );
 		ImageJFunctions.show( view1 );
 
-		Converter< UnsignedByteType, FloatType > c2 = new RealFloatConverter< UnsignedByteType >();
+		Converter< UnsignedByteType, FloatType > c2 = new RealFloatConverter<>();
 		RandomAccessibleInterval< FloatType > view2 = Converters.convert( img, c2, new FloatType() );
 		ImageJFunctions.show( view2 );
 	}

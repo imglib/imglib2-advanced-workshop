@@ -22,7 +22,7 @@ public class RealViewsExample2
 		final Img< FloatType > img = IO.openImgs( "images/bee-1.tif", new ArrayImgFactory<>(), new FloatType() ).get( 0 ).getImg();
 
 		RandomAccessible< FloatType > input = Views.extendValue( img, new FloatType( 128 ) );
-		RealRandomAccessible< FloatType > interpolated = Views.interpolate( input, new NLinearInterpolatorFactory<FloatType>() );
+		RealRandomAccessible< FloatType > interpolated = Views.interpolate( input, new NLinearInterpolatorFactory<>() );
 
 		AffineTransform2D affine = new AffineTransform2D();
 		affine.scale( 2.3 );

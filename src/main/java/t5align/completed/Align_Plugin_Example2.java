@@ -31,7 +31,7 @@ public class Align_Plugin_Example2 implements PlugIn
 						RealViews.affine(
 								Views.interpolate(
 										Views.extendBorder( img ),
-										new NLinearInterpolatorFactory< T >() ),
+										new NLinearInterpolatorFactory<>() ),
 								transform ),
 						interval ),
 				"aligned image" );
@@ -68,7 +68,7 @@ public class Align_Plugin_Example2 implements PlugIn
 			return;
 		}
 
-		Align< FloatType > align = new Align< FloatType >( template, new ArrayImgFactory< FloatType >() );
+		Align< FloatType > align = new Align<>( template, new ArrayImgFactory<>() );
 		AffineTransform transform = align.align( image, maxIterations, minParameterChange );
 
 		switch ( impTemplate.getType() )

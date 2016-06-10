@@ -15,7 +15,7 @@ public class ViewsExample2Alternative
 {
 	public static void main( final String[] args ) throws ImgIOException
 	{
-		final ImgFactory< UnsignedByteType > factory = new ArrayImgFactory< UnsignedByteType >();
+		final ImgFactory< UnsignedByteType > factory = new ArrayImgFactory<>();
 		final Img< UnsignedByteType > img = IO.openImgs( "images/t1-head.tif", factory, new UnsignedByteType() ).get( 0 ).getImg();
 		ImageJFunctions.show( img );
 

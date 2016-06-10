@@ -17,7 +17,7 @@ public class ShowSteepestDescentExample
 		final ArrayImgFactory< FloatType > factory = new ArrayImgFactory<>();
 		final Img< FloatType > template = IO.openImgs( "images/template.png", factory, type ).get( 0 ).getImg();
 
-		final Align< FloatType > align = new Align< FloatType >( template, factory );
+		final Align< FloatType > align = new Align<>( template, factory );
 
 		new ImageJ();
 		ImageJFunctions.show( template, "template" );

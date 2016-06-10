@@ -39,7 +39,7 @@ public class GradientExample2
 	public static void main( final String[] args ) throws ImgIOException
 	{
 		final FloatType type = new FloatType();
-		final ArrayImgFactory< FloatType > factory = new ArrayImgFactory< FloatType >();
+		final ArrayImgFactory< FloatType > factory = new ArrayImgFactory<>();
 		final Img< FloatType > input = IO.openImgs( "images/bee-1.tif", factory, type ).get( 0 ).getImg();
 		ImageJFunctions.show( input );
 

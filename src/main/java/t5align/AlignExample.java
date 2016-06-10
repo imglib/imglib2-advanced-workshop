@@ -17,11 +17,11 @@ public class AlignExample
 	public static void main( final String[] args ) throws ImgIOException
 	{
 		final FloatType type = new FloatType();
-		final ArrayImgFactory< FloatType > factory = new ArrayImgFactory< FloatType >();
+		final ArrayImgFactory< FloatType > factory = new ArrayImgFactory<>();
 		final Img< FloatType > image = IO.openImgs( "images/image-2.png", factory, type ).get( 0 ).getImg();
 		final Img< FloatType > template = IO.openImgs( "images/template.png", factory, type ).get( 0 ).getImg();
 
-		Align< FloatType > align = new Align< FloatType >( template, factory );
+		Align< FloatType > align = new Align<>( template, factory );
 		AffineTransform transform = align.align( image, 500, 0.01 );
 
 		ImageJFunctions.show( template, "template" );
@@ -31,7 +31,7 @@ public class AlignExample
 						RealViews.affine(
 								Views.interpolate(
 										Views.extendValue( image, new FloatType(0) ),
-										new NLinearInterpolatorFactory< FloatType >() ),
+										new NLinearInterpolatorFactory<>() ),
 						transform ),
 				template ),
 				"aligned image" );

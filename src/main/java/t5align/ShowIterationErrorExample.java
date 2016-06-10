@@ -28,7 +28,7 @@ public class ShowIterationErrorExample
 		dim[ n ] = numIterations;
 		final Img< FloatType > errors = factory.create( dim, type );
 
-		Align< FloatType > align = new Align< FloatType >( template, factory );
+		Align< FloatType > align = new Align<>( template, factory );
 		for ( int i = 0; i < numIterations; ++i )
 		{
 			align.alignStep( image );
