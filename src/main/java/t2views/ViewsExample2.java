@@ -14,7 +14,7 @@ public class ViewsExample2
 	public static void main( final String[] args )
 	{
 		new ImageJ();
-		IJ.run("T1 Head (2.4M, 16-bits)");
+		IJ.run( "T1 Head (2.4M, 16-bits)" );
 		ImagePlus imp = IJ.getImage();
 		Img< UnsignedShortType > img = ImageJFunctions.wrapShort( imp );
 
