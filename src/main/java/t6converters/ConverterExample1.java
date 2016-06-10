@@ -1,7 +1,7 @@
 package t6converters;
 
+import io.scif.img.IO;
 import io.scif.img.ImgIOException;
-import io.scif.img.ImgOpener;
 
 import net.imglib2.RandomAccessibleInterval;
 import net.imglib2.converter.ChannelARGBConverter;
@@ -18,8 +18,8 @@ public class ConverterExample1
 	public static void main(final String[] args) throws ImgIOException
 	{
 		UnsignedByteType type = new UnsignedByteType();
-		ArrayImgFactory< UnsignedByteType > factory = new ArrayImgFactory< UnsignedByteType >();
-		RandomAccessibleInterval< UnsignedByteType > img = new ImgOpener().openImg( "images/bee-1.tif", factory, type );
+		ArrayImgFactory< UnsignedByteType > factory = new ArrayImgFactory<>();
+		RandomAccessibleInterval< UnsignedByteType > img = IO.openImgs( "images/bee-1.tif", factory, type ).get( 0 ).getImg();
 		ImageJFunctions.show( img );
 
 		Converter< UnsignedByteType, ARGBType > c1 = new ChannelARGBConverter( Channel.G );

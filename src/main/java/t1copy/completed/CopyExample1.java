@@ -1,6 +1,5 @@
 package t1copy.completed;
 
-import ij.ImagePlus;
 import io.scif.img.IO;
 import io.scif.img.ImgIOException;
 
@@ -43,8 +42,6 @@ public class CopyExample1
 		copy( input, output );
 
 		// show output
-		final ImagePlus imp = ImageJFunctions.show( output );
-		imp.getProcessor().resetMinAndMax();
-		imp.updateAndRepaintWindow();
+		ImageJFunctions.show( output );
 	}
 }

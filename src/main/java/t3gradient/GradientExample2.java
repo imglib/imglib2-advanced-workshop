@@ -1,7 +1,7 @@
 package t3gradient;
 
+import io.scif.img.IO;
 import io.scif.img.ImgIOException;
-import io.scif.img.ImgOpener;
 
 import net.imglib2.RandomAccessible;
 import net.imglib2.RandomAccessibleInterval;
@@ -44,7 +44,7 @@ public class GradientExample2
 	{
 		final FloatType type = new FloatType();
 		final ArrayImgFactory< FloatType > factory = new ArrayImgFactory< FloatType >();
-		final Img< FloatType > input = new ImgOpener().openImg( "images/bee-1.tif", factory, type );
+		final Img< FloatType > input = IO.openImgs( "images/bee-1.tif", factory, type ).get( 0 ).getImg();
 		ImageJFunctions.show( input );
 
 		final int n = input.numDimensions();

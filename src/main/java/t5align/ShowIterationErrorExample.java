@@ -1,10 +1,9 @@
 package t5align;
 
 import static t1copy.completed.CopyExample2.copy;
-import io.scif.img.ImgIOException;
-import io.scif.img.ImgOpener;
 
-import net.imagej.ImgPlus;
+import io.scif.img.IO;
+import io.scif.img.ImgIOException;
 import net.imglib2.img.Img;
 import net.imglib2.img.array.ArrayImgFactory;
 import net.imglib2.img.display.imagej.ImageJFunctions;
@@ -16,13 +15,12 @@ public class ShowIterationErrorExample
 	public static void main( final String[] args ) throws ImgIOException
 	{
 		final FloatType type = new FloatType();
-		final ArrayImgFactory< FloatType > factory = new ArrayImgFactory< FloatType >();
-		final ImgOpener opener = new ImgOpener();
-		final ImgPlus< FloatType > image = opener.openImg( "images/image-2.png", factory, type );
-		final ImgPlus< FloatType > template = opener.openImg( "images/template.png", factory, type );
+		final ArrayImgFactory< FloatType > factory = new ArrayImgFactory<>();
+		final Img< FloatType > image = IO.openImgs( "images/image-2.png", factory, type ).get( 0 ).getImg();
+		final Img< FloatType > template = IO.openImgs( "images/template.png", factory, type ).get( 0 ).getImg();
 
 		final int numIterations = 10;
-		
+
 		final int n = template.numDimensions();
 		final long[] dim = new long[ n + 1 ];
 		for ( int d = 0; d < n; ++d )

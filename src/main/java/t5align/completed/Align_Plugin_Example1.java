@@ -53,7 +53,7 @@ public class Align_Plugin_Example1 implements PlugIn
 		Align< FloatType > align = new Align< FloatType >( template, new ArrayImgFactory< FloatType >() );
 		AffineTransform transform = align.align( image, maxIterations, minParameterChange );
 
-		RandomAccessible< FloatType > transformed = RealViews.constantAffine(
+		RandomAccessible< FloatType > transformed = RealViews.affine(
 				Views.interpolate( Views.extendBorder( image ),	new NLinearInterpolatorFactory< FloatType >() ),
 				transform );
 		ImageJFunctions.show( Views.interval( transformed, template ), "aligned image" );

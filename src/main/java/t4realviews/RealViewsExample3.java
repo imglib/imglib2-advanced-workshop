@@ -1,9 +1,8 @@
 package t4realviews;
 
+import io.scif.img.IO;
 import io.scif.img.ImgIOException;
-import io.scif.img.ImgOpener;
 
-import net.imagej.ImgPlus;
 import net.imglib2.RandomAccessible;
 import net.imglib2.RandomAccessibleInterval;
 import net.imglib2.img.Img;
@@ -52,10 +51,9 @@ public class RealViewsExample3
 	public static void main( final String[] args ) throws ImgIOException
 	{
 		final FloatType type = new FloatType();
-		final ArrayImgFactory< FloatType > factory = new ArrayImgFactory< FloatType >();
-		final ImgOpener opener = new ImgOpener();
-		final ImgPlus< FloatType > template = opener.openImg( "images/template.png", factory, type );
-		final ImgPlus< FloatType > image = opener.openImg( "images/image-1.png", factory, type );
+		final ArrayImgFactory< FloatType > factory = new ArrayImgFactory<>();
+		final Img< FloatType > template = IO.openImgs( "images/template.png", factory, type ).get( 0 ).getImg();
+		final Img< FloatType > image = IO.openImgs( "images/image-1.png", factory, type ).get( 0 ).getImg();
 		final Img< FloatType > difference = factory.create( template, type );
 
 		// TODO:

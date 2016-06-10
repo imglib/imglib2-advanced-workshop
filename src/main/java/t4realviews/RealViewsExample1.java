@@ -1,7 +1,7 @@
 package t4realviews;
 
+import io.scif.img.IO;
 import io.scif.img.ImgIOException;
-import io.scif.img.ImgOpener;
 
 import net.imglib2.RandomAccessible;
 import net.imglib2.RealRandomAccessible;
@@ -10,6 +10,7 @@ import net.imglib2.img.Img;
 import net.imglib2.img.array.ArrayImgFactory;
 import net.imglib2.interpolation.InterpolatorFactory;
 import net.imglib2.interpolation.randomaccess.NearestNeighborInterpolatorFactory;
+import net.imglib2.realtransform.AffineTransform2D;
 import net.imglib2.type.numeric.real.FloatType;
 import net.imglib2.ui.viewer.InteractiveRealViewer2D;
 import net.imglib2.util.Util;
@@ -19,18 +20,18 @@ public class RealViewsExample1
 {
 	public static void main( final String[] args ) throws ImgIOException
 	{
-		final Img< FloatType > img = new ImgOpener().openImg( "images/bee-1.tif", new ArrayImgFactory< FloatType >(), new FloatType() );
-		System.out.println( Util.printInterval( img ));
+		final Img< FloatType > img = IO.openImgs( "images/bee-1.tif", new ArrayImgFactory< FloatType >(), new FloatType() ).get( 0 ).getImg();
+		System.out.println( Util.printInterval( img ) );
 
 		// TODO: try the different InterpolatorFactories
 		InterpolatorFactory< FloatType, RandomAccessible< FloatType > > factory;
-		factory = new NearestNeighborInterpolatorFactory< FloatType >();
-//		factory = new NLinearInterpolatorFactory< FloatType >();
-//		factory = new LanczosInterpolatorFactory< FloatType >();
+		factory = new NearestNeighborInterpolatorFactory<>();
+//		factory = new NLinearInterpolatorFactory<>();
+//		factory = new LanczosInterpolatorFactory<>();
 
 		final RandomAccessible< FloatType > input = Views.extendValue( img, new FloatType( 128 ) );
 		final RealRandomAccessible< FloatType > interpolated = Views.interpolate( input, factory );
 
-		new InteractiveRealViewer2D< FloatType >( 639, 373, interpolated, new RealARGBConverter< FloatType >( 0, 255 ) );
+		new InteractiveRealViewer2D<>( 639, 373, interpolated, new AffineTransform2D(), new RealARGBConverter<>( 0, 255 ) );
 	}
 }

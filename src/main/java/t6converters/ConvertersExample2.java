@@ -1,7 +1,7 @@
 package t6converters;
 
+import io.scif.img.IO;
 import io.scif.img.ImgIOException;
-import io.scif.img.ImgOpener;
 
 import net.imglib2.RandomAccessibleInterval;
 import net.imglib2.converter.Converter;
@@ -17,8 +17,8 @@ public class ConvertersExample2
 	public static void main(final String[] args) throws ImgIOException
 	{
 		UnsignedByteType type = new UnsignedByteType();
-		ArrayImgFactory< UnsignedByteType > factory = new ArrayImgFactory< UnsignedByteType >();
-		RandomAccessibleInterval< UnsignedByteType > img = new ImgOpener().openImg( "images/bee-1.tif", factory, type );
+		ArrayImgFactory< UnsignedByteType > factory = new ArrayImgFactory<>();
+		RandomAccessibleInterval< UnsignedByteType > img = IO.openImgs( "images/bee-1.tif", factory, type ).get( 0 ).getImg();
 
 		Converter< UnsignedByteType, FloatType > c = new RealFloatConverter< UnsignedByteType >();
 		RandomAccessibleInterval< FloatType > view = Converters.convert( img, c, new FloatType() );
@@ -36,6 +36,7 @@ public class ConvertersExample2
 					}
 				},
 				new FloatType() );
+
 		ImageJFunctions.show( inverted );
 	}
 }

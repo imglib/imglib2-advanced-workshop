@@ -28,7 +28,7 @@ public class Align_Plugin_Example2 implements PlugIn
 	{
 		ImageJFunctions.show(
 				Views.interval(
-						RealViews.constantAffine(
+						RealViews.affine(
 								Views.interpolate(
 										Views.extendBorder( img ),
 										new NLinearInterpolatorFactory< T >() ),

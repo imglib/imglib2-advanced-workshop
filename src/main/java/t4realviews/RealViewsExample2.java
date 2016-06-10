@@ -1,5 +1,6 @@
 package t4realviews;
 
+import io.scif.img.IO;
 import io.scif.img.ImgIOException;
 import io.scif.img.ImgOpener;
 
@@ -18,7 +19,7 @@ public class RealViewsExample2
 {
 	public static void main( final String[] args ) throws ImgIOException
 	{
-		final Img< FloatType > img = new ImgOpener().openImg( "images/bee-1.tif", new ArrayImgFactory< FloatType >(), new FloatType() );
+		final Img< FloatType > img = IO.openImgs( "images/bee-1.tif", new ArrayImgFactory<>(), new FloatType() ).get( 0 ).getImg();
 
 		RandomAccessible< FloatType > input = Views.extendValue( img, new FloatType( 128 ) );
 		RealRandomAccessible< FloatType > interpolated = Views.interpolate( input, new NLinearInterpolatorFactory<FloatType>() );

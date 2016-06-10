@@ -31,7 +31,7 @@ public class SparseExample1
 		NearestNeighborSearch< ARGBType > search;
 
 		// 3.) Use Views.interpolate() to create a continuous interpolated accessible
-		//     (use a NearestNeighborInterpolatorFactory<ARGBType>).
+		//     (use a NearestNeighborSearchInterpolatorFactory<ARGBType>).
 		RealRandomAccessible< ARGBType > interpolated;
 
 		// 4.) Use Views to rasterize and crop to the interval defined above.

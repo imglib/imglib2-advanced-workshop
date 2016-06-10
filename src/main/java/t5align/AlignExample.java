@@ -1,9 +1,9 @@
 package t5align;
 
+import io.scif.img.IO;
 import io.scif.img.ImgIOException;
-import io.scif.img.ImgOpener;
 
-import net.imagej.ImgPlus;
+import net.imglib2.img.Img;
 import net.imglib2.img.array.ArrayImgFactory;
 import net.imglib2.img.display.imagej.ImageJFunctions;
 import net.imglib2.interpolation.randomaccess.NLinearInterpolatorFactory;
@@ -18,9 +18,8 @@ public class AlignExample
 	{
 		final FloatType type = new FloatType();
 		final ArrayImgFactory< FloatType > factory = new ArrayImgFactory< FloatType >();
-		final ImgOpener opener = new ImgOpener();
-		final ImgPlus< FloatType > image = opener.openImg( "images/image-3.png", factory, type );
-		final ImgPlus< FloatType > template = opener.openImg( "images/template.png", factory, type );
+		final Img< FloatType > image = IO.openImgs( "images/image-2.png", factory, type ).get( 0 ).getImg();
+		final Img< FloatType > template = IO.openImgs( "images/template.png", factory, type ).get( 0 ).getImg();
 
 		Align< FloatType > align = new Align< FloatType >( template, factory );
 		AffineTransform transform = align.align( image, 500, 0.01 );
@@ -29,7 +28,7 @@ public class AlignExample
 		ImageJFunctions.show( image, "image" );
 		ImageJFunctions.show(
 				Views.interval(
-						RealViews.constantAffine(
+						RealViews.affine(
 								Views.interpolate(
 										Views.extendValue( image, new FloatType(0) ),
 										new NLinearInterpolatorFactory< FloatType >() ),

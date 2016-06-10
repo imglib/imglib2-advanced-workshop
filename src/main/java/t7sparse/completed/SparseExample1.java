@@ -9,7 +9,7 @@ import net.imglib2.RandomAccessibleInterval;
 import net.imglib2.RealPoint;
 import net.imglib2.RealRandomAccessible;
 import net.imglib2.img.display.imagej.ImageJFunctions;
-import net.imglib2.interpolation.randomaccess.NearestNeighborInterpolatorFactory;
+import net.imglib2.interpolation.neighborsearch.NearestNeighborSearchInterpolatorFactory;
 import net.imglib2.neighborsearch.NearestNeighborSearch;
 import net.imglib2.neighborsearch.NearestNeighborSearchOnKDTree;
 import net.imglib2.type.numeric.ARGBType;
@@ -27,9 +27,9 @@ public class SparseExample1
 		// the interval we want to display
 		Interval interval = Intervals.createMinSize( 0, 0, 320, 200 );
 
-		KDTree< ARGBType > kdtree = new KDTree< ARGBType >( colors, coordinates );
-		NearestNeighborSearch< ARGBType > search = new NearestNeighborSearchOnKDTree< ARGBType >( kdtree );
-		RealRandomAccessible< ARGBType > interpolated = Views.interpolate( search, new NearestNeighborInterpolatorFactory< ARGBType >() );
+		KDTree< ARGBType > kdtree = new KDTree<>( colors, coordinates );
+		NearestNeighborSearch< ARGBType > search = new NearestNeighborSearchOnKDTree<>( kdtree );
+		RealRandomAccessible< ARGBType > interpolated = Views.interpolate( search, new NearestNeighborSearchInterpolatorFactory<>() );
 		RandomAccessibleInterval< ARGBType > view = Views.interval( Views.raster( interpolated ), interval );
 		ImageJFunctions.show( view );
 	}
