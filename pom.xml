@@ -25,8 +25,7 @@
 		<url>https://github.com/imglib/imglib2-advanced-workshop/issues</url>
 	</issueManagement>
 	<ciManagement>
-		<system>Jenkins</system>
-		<url>http://jenkins.imagej.net/job/ImgLib2-Advanced-Workshop</url>
+		<system>None</system>
 	</ciManagement>
 
 	<repositories>
