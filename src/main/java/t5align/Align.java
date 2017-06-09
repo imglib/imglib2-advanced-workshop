@@ -2,8 +2,8 @@ package t5align;
 
 import static t3gradient.completed.GradientExample2.gradients;
 import static t4realviews.completed.RealViewsExample3.computeDifference;
-import Jama.Matrix;
 
+import Jama.Matrix;
 import net.imglib2.Cursor;
 import net.imglib2.RandomAccess;
 import net.imglib2.RandomAccessibleInterval;
@@ -86,7 +86,7 @@ public class Align< T extends RealType<T> >
 	 * Each steepest descent image comprises the partial derivatives of template
 	 * intensities with respect to one parameter of the warp function.
 	 *
-	 * The result is stored in the <em>n+1</em> dimensional {@link #target}
+	 * The result is stored in the <em>n+1</em> dimensional {@code target}
 	 * image. Dimension <em>n</em> is used to index the partial derivative. For
 	 * example, the partial derivative by the second parameter of the warp
 	 * function is stored in slice <em>n=1</em>.

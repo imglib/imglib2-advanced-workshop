@@ -21,7 +21,7 @@ public interface WarpFunction
 	 * @param d
 	 *            dimension of the warped image coordinate whose derivative to
 	 *            take.
-	 * @param p
+	 * @param param
 	 *            parameter by which to derive.
 	 */
 	public double partial( RealLocalizable pos, int d, int param );
