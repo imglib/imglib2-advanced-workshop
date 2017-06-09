@@ -178,7 +178,6 @@ Jean-Yves Tinevez and Michael Zinsmaier.</license.copyrightOwners>
 		<dependency>
 			<groupId>sc.fiji</groupId>
 			<artifactId>fiji-lib</artifactId>
-			<version>2.1.1</version>
 		</dependency>
 	</dependencies>
 </project>
