@@ -120,13 +120,13 @@ public class CustomTypeMIPExample
 	private static Img< StringType > getStringImage()
 	{
 		final String[] wordArray = new String[] {
-				"Bling ", 	"Bromance ", 	"Chillax ", 		"Crunk ", 		"D'oh ", 		"Droolworthy ", 	"1 ", 	
-				"Don't ", 	"Guyliner ",		"Hater ", 		"Illiterati ", 	"Infomania ", 	"Jeggings ", 	"? ", 	
-				"Blast ", 	"Mankini ", 		"Taratata ", 		"Cake ",			"Muggle ", 		"Noob ", 		"< ", 
-				"Aaron ", 	"Po-po ", 		"Purple ",	"Freud ", 		"Really ", 		"Leetspeak ", 	"= ", 
-				"Crown ", 	"Twitterati ", 	"Think ", 		"ImgLib2 ", 		"Killer ", 	"Rocks ", 		"+ ", 
-				"Dizzy ", 	"You ", 			"Florian ", 		"Elicit ", 	"Horrible ", 	"Jan ", 			") ",
-				"Albert ", 	"Pavel ",		"Johannes ",		"Bob ",			"Mathias ",		"Rastafari ",	"# " 		};
+				"Bling ",   "Bromance ",    "Chillax ",   "Crunk ",       "D'oh ",       "Droolworthy ",  "1 ",
+				"Don't ",   "Guyliner ",    "Hater ",     "Illiterati ",  "Infomania ",  "Jeggings ",     "? ",
+				"Blast ",   "Mankini ",     "Taratata ",  "Cake ",        "Muggle ",     "Noob ",         "< ",
+				"Aaron ",   "Po-po ",       "Purple ",    "Freud ",       "Really ",     "Leetspeak ",    "= ",
+				"Crown ",   "Twitterati ",  "Think ",     "ImgLib2 ",     "Killer ",     "Rocks ",        "+ ",
+				"Dizzy ",   "You ",         "Florian ",   "Elicit ",      "Horrible ",   "Jan ",          ") ",
+				"Albert ",  "Pavel ",       "Johannes ",  "Bob ",         "Mathias ",    "Rastafari ",    "# " };
 		final List< String > words = Arrays.asList( wordArray );
 
 		// ListImg is one of the only Accessible that allows storing non-proxy types.
