@@ -48,7 +48,7 @@ public class StringType implements Type< StringType >, Comparable< StringType >,
 		// To facilitate display.
 		return str;
 	}
-	
+
 	/*
 	 * COMPARE METHODS.
 	 */
@@ -61,17 +61,17 @@ public class StringType implements Type< StringType >, Comparable< StringType >,
 	}
 
 	@Override
-	public boolean valueEquals( StringType t )
+	public boolean valueEquals( final StringType t )
 	{
 		return str.equals( t.str );
 	}
-	
+
 	/*
 	 * ADD METHODS.
 	 */
 
 	@Override
-	public void add( StringType t )
+	public void add( final StringType t )
 	{
 		// Since string are immutable, we have to replace this type's string.
 		this.str +=  t;

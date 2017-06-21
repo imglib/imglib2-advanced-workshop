@@ -12,38 +12,38 @@ import net.imglib2.img.list.ListImgFactory;
 public class CustomTypeMIPExample
 {
 
-	public static void main( String[] args )
+	public static void main( final String[] args )
 	{
-		Img< StringType > img = getStringImage();
+		final Img< StringType > img = getStringImage();
 
 		System.out.println( "Input image:\n\n" + toString( img, 12 ) );
 
-		Img< StringType > mip = performMIP( img );
+		final Img< StringType > mip = performMIP( img );
 		System.out.println( "\nResult of MIP:\n\n" + toString( mip, 12 ) );
 
-		Img< StringType > sip = performSIP( img );
+		final Img< StringType > sip = performSIP( img );
 		System.out.println( "\nResult of SIP:\n\n" + toString( sip, 12 ) );
 	}
 
 	/**
 	 * Performs summation-intensity projection along the Y axis for the
 	 * specified 2D image.
-	 * 
+	 *
 	 * @param img
 	 *            the 2D input.
 	 * @return a new 1D image.
 	 */
-	private static Img< StringType > performSIP( Img< StringType > img )
+	private static Img< StringType > performSIP( final Img< StringType > img )
 	{
 		final ListImg< StringType > sip = new ListImgFactory< StringType >()
 				.create( new long[] { img.dimension( 0 ), 1l }, new StringType() );
 
-		ListCursor< StringType > outputCursor = sip.cursor();
-		RandomAccess< StringType > inputRA = img.randomAccess();
+		final ListCursor< StringType > outputCursor = sip.cursor();
+		final RandomAccess< StringType > inputRA = img.randomAccess();
 		while ( outputCursor.hasNext() )
 		{
 			outputCursor.fwd();
-			StringType target = outputCursor.get();
+			final StringType target = outputCursor.get();
 
 			// Initialize with empty value.
 			target.set( "" );
@@ -52,7 +52,7 @@ public class CustomTypeMIPExample
 			for ( int y = 0; y < img.dimension( 1 ); y++ )
 			{
 				inputRA.setPosition( y, 1 );
-				StringType st = inputRA.get();
+				final StringType st = inputRA.get();
 				target.add( st );
 			}
 		}
@@ -63,22 +63,22 @@ public class CustomTypeMIPExample
 	/**
 	 * Performs maximum-intensity projection along the Y axis for the specified
 	 * 2D image.
-	 * 
+	 *
 	 * @param img
 	 *            the 2D input.
 	 * @return a new 1D image.
 	 */
-	private static Img< StringType > performMIP( Img< StringType > img )
+	private static Img< StringType > performMIP( final Img< StringType > img )
 	{
 		final ListImg< StringType > mip = new ListImgFactory< StringType >()
 				.create( new long[] { img.dimension( 0 ), 1l }, new StringType() );
 
-		ListCursor< StringType > outputCursor = mip.cursor();
-		RandomAccess< StringType > inputRA = img.randomAccess();
+		final ListCursor< StringType > outputCursor = mip.cursor();
+		final RandomAccess< StringType > inputRA = img.randomAccess();
 		while ( outputCursor.hasNext() )
 		{
 			outputCursor.fwd();
-			StringType target = outputCursor.get();
+			final StringType target = outputCursor.get();
 			// Initialize with very low value.
 			target.set( "" );
 
@@ -86,7 +86,7 @@ public class CustomTypeMIPExample
 			for ( int y = 0; y < img.dimension( 1 ); y++ )
 			{
 				inputRA.setPosition( y, 1 );
-				StringType st = inputRA.get();
+				final StringType st = inputRA.get();
 				if ( st.compareTo( target ) > 0 )
 					target.set( st );
 			}
@@ -97,19 +97,19 @@ public class CustomTypeMIPExample
 
 	/**
 	 * Create a 7x7 string based image.
-	 * 
+	 *
 	 * @return an image.
 	 */
 	private static Img< StringType > getStringImage()
 	{
 		final String[] wordArray = new String[] {
-				"Bling ", 	"Bromance ", 	"Chillax ", 		"Crunk ", 		"D'oh ", 		"Droolworthy ", 	"1 ", 	
-				"Don't ", 	"Guyliner ",		"Hater ", 		"Illiterati ", 	"Infomania ", 	"Jeggings ", 	"? ", 	
-				"Blast ", 	"Mankini ", 		"Taratata ", 		"Cake ",			"Muggle ", 		"Noob ", 		"< ", 
-				"Aaron ", 	"Po-po ", 		"Purple ",	"Freud ", 		"Really ", 		"Leetspeak ", 	"= ", 
-				"Crown ", 	"Twitterati ", 	"Think ", 		"ImgLib2 ", 		"Killer ", 	"Rocks ", 		"+ ", 
-				"Dizzy ", 	"You ", 			"Florian ", 		"Elicit ", 	"Horrible ", 	"Jan ", 			") ",
-				"Albert ", 	"Pavel ",		"Johannes ",		"Bob ",			"Mathias ",		"Rastafari ",	"# " 		};
+				"Bling ",   "Bromance ",    "Chillax ",   "Crunk ",       "D'oh ",       "Droolworthy ",  "1 ",
+				"Don't ",   "Guyliner ",    "Hater ",     "Illiterati ",  "Infomania ",  "Jeggings ",     "? ",
+				"Blast ",   "Mankini ",     "Taratata ",  "Cake ",        "Muggle ",     "Noob ",         "< ",
+				"Aaron ",   "Po-po ",       "Purple ",    "Freud ",       "Really ",     "Leetspeak ",    "= ",
+				"Crown ",   "Twitterati ",  "Think ",     "ImgLib2 ",     "Killer ",     "Rocks ",        "+ ",
+				"Dizzy ",   "You ",         "Florian ",   "Elicit ",      "Horrible ",   "Jan ",          ") ",
+				"Albert ",  "Pavel ",       "Johannes ",  "Bob ",         "Mathias ",    "Rastafari ",    "# " };
 		final List< String > words = Arrays.asList( wordArray );
 
 		// ListImg is one of the only Accessible that allows storing non-proxy types.
@@ -127,7 +127,7 @@ public class CustomTypeMIPExample
 
 	/**
 	 * Outputs an image to a string. Only valid for 2D images.
-	 * 
+	 *
 	 * @param img
 	 *            the image to print.
 	 * @param columnSize
