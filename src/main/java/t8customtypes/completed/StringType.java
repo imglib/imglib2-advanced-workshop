@@ -2,17 +2,27 @@ package t8customtypes.completed;
 
 import net.imglib2.type.Type;
 import net.imglib2.type.operators.Add;
+import net.imglib2.type.operators.SetZero;
 
-public class StringType implements Type< StringType >, Comparable< StringType >, Add< StringType >
+/**
+ * An ImgLib2 type for String objects.
+ */
+public class StringType implements Type< StringType >, Comparable< StringType >, Add< StringType >, SetZero
 {
-
 	/**
 	 * The string we wrap.
 	 */
 	private String str;
 
 	public StringType()
-	{}
+	{
+		this( "" );
+	}
+
+	public StringType( final StringType t )
+	{
+		this( t.str );
+	}
 
 	public StringType( final String str )
 	{
@@ -28,18 +38,24 @@ public class StringType implements Type< StringType >, Comparable< StringType >,
 	@Override
 	public StringType copy()
 	{
-		return new StringType( str );
+		return new StringType( this );
 	}
 
 	@Override
-	public void set( final StringType c )
+	public void set( final StringType t )
 	{
-		str = c.str;
+		str = t.str;
 	}
 
-	public void set( final String str )
+	/**
+	 * An extra method to modify the content of this type from a string.
+	 *
+	 * @param t
+	 *            the string to wrap in this type.
+	 */
+	public void set( final String t )
 	{
-		this.str = str;
+		str = t;
 	}
 
 	@Override
@@ -49,32 +65,41 @@ public class StringType implements Type< StringType >, Comparable< StringType >,
 		return str;
 	}
 
+	@Override
+	public boolean valueEquals( final StringType t )
+	{
+		return compareTo( t ) == 0;
+	}
+
 	/*
-	 * COMPARE METHODS.
+	 * COMPARE INTERFACE.
 	 */
 
 	@Override
 	public int compareTo( final StringType o )
 	{
 		// This is how we define comparing for string types. It can be anything you want.
-		return str.compareToIgnoreCase( o.str );
-	}
-
-	@Override
-	public boolean valueEquals( final StringType t )
-	{
-		return str.equals( t.str );
+		return toString().compareToIgnoreCase( o.toString() );
 	}
 
 	/*
-	 * ADD METHODS.
+	 * ADD INTERFACE.
 	 */
 
 	@Override
 	public void add( final StringType t )
 	{
 		// Since string are immutable, we have to replace this type's string.
-		this.str +=  t;
+		str = toString() + t.toString();
 	}
 
+	/*
+	 * SETZERO INTERFACE.
+	 */
+
+	@Override
+	public void setZero()
+	{
+		str = "";
+	}
 }
