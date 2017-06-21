@@ -4,10 +4,15 @@ import java.util.Arrays;
 import java.util.List;
 
 import net.imglib2.RandomAccess;
+import net.imglib2.RandomAccessibleInterval;
 import net.imglib2.img.Img;
 import net.imglib2.img.list.ListCursor;
 import net.imglib2.img.list.ListImg;
 import net.imglib2.img.list.ListImgFactory;
+import net.imglib2.type.Type;
+import net.imglib2.type.operators.Add;
+import net.imglib2.type.operators.SetZero;
+import net.imglib2.util.Util;
 
 public class CustomTypeMIPExample
 {
@@ -33,31 +38,37 @@ public class CustomTypeMIPExample
 	 *            the 2D input.
 	 * @return a new 1D image.
 	 */
-	private static Img< StringType > performSIP( final Img< StringType > img )
+	private static < T extends Type< T > & Add< T > & SetZero >
+			Img< T > performSIP( final RandomAccessibleInterval< T > img )
 	{
-		final ListImg< StringType > sip = new ListImgFactory< StringType >()
-				.create( new long[] { img.dimension( 0 ), 1l }, new StringType() );
+		final T type = Util.getTypeFromInterval( img );
+		final ListImg< T > sip = new ListImgFactory< T >()
+				.create( new long[] { img.dimension( 0 ), 1l }, type );
 
-		final ListCursor< StringType > outputCursor = sip.cursor();
-		final RandomAccess< StringType > inputRA = img.randomAccess();
+		final ListCursor< T > outputCursor = sip.cursor();
+		final RandomAccess< T > inputRA = img.randomAccess();
 		while ( outputCursor.hasNext() )
 		{
 			outputCursor.fwd();
-			final StringType target = outputCursor.get();
+			final T target = outputCursor.get();
 
 			// Initialize with empty value.
-			target.set( "" );
+			target.setZero();
 
 			inputRA.setPosition( outputCursor.getIntPosition( 0 ), 0 );
 			for ( int y = 0; y < img.dimension( 1 ); y++ )
 			{
 				inputRA.setPosition( y, 1 );
-				final StringType st = inputRA.get();
+				final T st = inputRA.get();
 				target.add( st );
 			}
 		}
-
 		return sip;
+	}
+
+	static < T extends Comparable< T > > T max( final T a, final T b )
+	{
+		return a.compareTo( b ) > 0 ? a : b;
 	}
 
 	/**
@@ -68,27 +79,29 @@ public class CustomTypeMIPExample
 	 *            the 2D input.
 	 * @return a new 1D image.
 	 */
-	private static Img< StringType > performMIP( final Img< StringType > img )
+	private static < T extends Type< T > & Comparable< T > & SetZero >
+			Img< T > performMIP( final RandomAccessibleInterval< T > img )
 	{
-		final ListImg< StringType > mip = new ListImgFactory< StringType >()
-				.create( new long[] { img.dimension( 0 ), 1l }, new StringType() );
+		final T type = Util.getTypeFromInterval( img );
+		final ListImg< T > mip = new ListImgFactory< T >()
+				.create( new long[] { img.dimension( 0 ), 1l }, type );
 
-		final ListCursor< StringType > outputCursor = mip.cursor();
-		final RandomAccess< StringType > inputRA = img.randomAccess();
+		final ListCursor< T > outputCursor = mip.cursor();
+		final RandomAccess< T > inputRA = img.randomAccess();
 		while ( outputCursor.hasNext() )
 		{
 			outputCursor.fwd();
-			final StringType target = outputCursor.get();
+			final T target = outputCursor.get();
+
 			// Initialize with very low value.
-			target.set( "" );
+			target.setZero();
 
 			inputRA.setPosition( outputCursor.getIntPosition( 0 ), 0 );
 			for ( int y = 0; y < img.dimension( 1 ); y++ )
 			{
 				inputRA.setPosition( y, 1 );
-				final StringType st = inputRA.get();
-				if ( st.compareTo( target ) > 0 )
-					target.set( st );
+				final T st = inputRA.get();
+				target.set( max( target, st ) );
 			}
 		}
 
