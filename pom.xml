@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.scijava</groupId>
 		<artifactId>pom-scijava</artifactId>
-		<version>16.1.0</version>
+		<version>22.3.0</version>
 	</parent>
 
 	<artifactId>imglib2-advanced-workshop</artifactId>
@@ -41,34 +41,6 @@
 			</roles>
 		</developer>
 		<developer>
-			<id>StephanPreibisch</id>
-			<name>Stephan Preibisch</name>
-			<url>http://imagej.net/User:StephanP</url>
-			<roles>
-				<role>founder</role>
-				<role>lead</role>
-				<role>developer</role>
-				<role>debugger</role>
-				<role>reviewer</role>
-				<role>support</role>
-				<role>maintainer</role>
-			</roles>
-		</developer>
-		<developer>
-			<id>axtimwalde</id>
-			<name>Stephan Saalfeld</name>
-			<url>http://imagej.net/User:Saalfeld</url>
-			<roles>
-				<role>founder</role>
-				<role>lead</role>
-				<role>developer</role>
-				<role>debugger</role>
-				<role>reviewer</role>
-				<role>support</role>
-				<role>maintainer</role>
-			</roles>
-		</developer>
-		<developer>
 			<id>ctrueden</id>
 			<name>Curtis Rueden</name>
 			<url>http://imagej.net/User:Rueden</url>
@@ -89,7 +61,6 @@
 			<archive>http://forum.imagej.net/</archive>
 		</mailingList>
 	</mailingLists>
-
 
 	<scm>
 		<connection>scm:git:git://github.com/imglib/imglib2-advanced-workshop</connection>
@@ -161,17 +132,11 @@ Jean-Yves Tinevez and Michael Zinsmaier.</license.copyrightOwners>
 		<!-- ImageJ dependencies -->
 		<dependency>
 			<groupId>net.imagej</groupId>
-			<artifactId>imagej-common</artifactId>
+			<artifactId>imagej</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>net.imagej</groupId>
-			<artifactId>ij</artifactId>
-		</dependency>
-
-		<!-- SCIFIO dependencies -->
-		<dependency>
-			<groupId>io.scif</groupId>
-			<artifactId>scifio</artifactId>
+			<artifactId>imagej-legacy</artifactId>
 		</dependency>
 
 		<!-- Fiji dependencies -->
