@@ -1,8 +1,9 @@
 package t4realviews.completed;
 
-import io.scif.img.IO;
 import io.scif.img.ImgIOException;
 
+import io.scif.img.ImgOpener;
+import net.imagej.ImageJ;
 import net.imglib2.Cursor;
 import net.imglib2.RandomAccessible;
 import net.imglib2.RandomAccessibleInterval;
@@ -48,16 +49,18 @@ public class RealViewsExample3
 		{
 			t.set( cw.next() );
 			t.sub( ct.next() );
-		}
+		} 
 	}
 
 	public static void main( final String[] args ) throws ImgIOException
 	{
-		final FloatType type = new FloatType();
-		final ArrayImgFactory< FloatType > factory = new ArrayImgFactory<>();
-		final Img< FloatType > template = IO.openImgs( "images/template.png", factory, type ).get( 0 ).getImg();
-		final Img< FloatType > image = IO.openImgs( "images/image-1.png", factory, type ).get( 0 ).getImg();
-		final Img< FloatType > difference = factory.create( template, type );
+		final ImageJ ij = new ImageJ();
+
+		final ArrayImgFactory< FloatType > imgFactory = new ArrayImgFactory<>( new FloatType() );
+		final ImgOpener opener = new ImgOpener( ij.context() );
+		final Img< FloatType > template = opener.openImgs( "images/template.png", imgFactory ).get( 0 ).getImg();
+		final Img< FloatType > image = opener.openImgs( "images/image-1.png", imgFactory ).get( 0 ).getImg();
+		final Img< FloatType > difference = imgFactory.create( template );
 
 		// TODO:
 		// If you want, you can try to find the transform parameters that brings

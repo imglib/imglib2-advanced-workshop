@@ -1,7 +1,9 @@
 package t3gradient.completed;
 
-import io.scif.img.IO;
 import io.scif.img.ImgIOException;
+import io.scif.img.ImgOpener;
+
+import net.imagej.ImageJ;
 import net.imglib2.RandomAccessible;
 import net.imglib2.RandomAccessibleInterval;
 import net.imglib2.img.Img;
@@ -53,16 +55,17 @@ public class GradientExample1StackAndCollapse
 
 	public static void main( final String[] args ) throws ImgIOException
 	{
-		final FloatType type = new FloatType();
-		final ArrayImgFactory< FloatType > factory = new ArrayImgFactory<>();
-		final Img< FloatType > input = IO.openImgs( "images/bee-1.tif", factory, type ).get( 0 ).getImg();
+		final ImageJ ij = new ImageJ();
+
+		final ArrayImgFactory< FloatType > factory = new ArrayImgFactory<>( new FloatType() );
+		final Img< FloatType > input = new ImgOpener( ij.context() ).openImgs( "images/bee-1.tif", factory ).get( 0 ).getImg();
 		ImageJFunctions.show( input );
 
-		final Img< FloatType > dX = factory.create( input, type );
+		final Img< FloatType > dX = factory.create( input );
 		gradient( Views.extendBorder( input ), dX, 0 );
 		ImageJFunctions.show( dX, "gradient X" );
 
-		final Img< FloatType > dY = factory.create( input, type );
+		final Img< FloatType > dY = factory.create( input );
 		gradient( Views.extendBorder( input ), dY, 1 );
 		ImageJFunctions.show( dY, "gradient Y" );
 	}

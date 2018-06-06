@@ -1,9 +1,11 @@
 package t2views;
 
 import static t1copy.completed.CopyExample2.copy;
-import io.scif.img.IO;
-import io.scif.img.ImgIOException;
 
+import io.scif.img.ImgIOException;
+import io.scif.img.ImgOpener;
+
+import net.imagej.ImageJ;
 import net.imglib2.RandomAccessible;
 import net.imglib2.RandomAccessibleInterval;
 import net.imglib2.img.Img;
@@ -20,7 +22,7 @@ public class ViewsExample1< T extends NativeType< T > & NumericType< T >>
 {
 	public void example( final Img< T > img )
 	{
-		ImageJFunctions.show( img );
+		ij.ui().show( img );
 
 		// TODO:
 		// 1.) Try show( img, "img" ).
@@ -29,7 +31,7 @@ public class ViewsExample1< T extends NativeType< T > & NumericType< T >>
 
 		// TODO: Experiment with the static methods of class Views:
 		// 1.) Show() the following translated view of img:
-		final RandomAccessibleInterval<T> t = Views.translate(img, -20, -20);
+		final RandomAccessibleInterval< T > t = Views.translate( img, -20, -20 );
 
 		// 2.) Invert the X axis of the view 1.)
 
@@ -38,7 +40,7 @@ public class ViewsExample1< T extends NativeType< T > & NumericType< T >>
 		// 4.) Shift view 3.) to the origin
 
 		// 5.) Show() the following periodically extended view of img:
-		final RandomAccessible<T> p = Views.extendPeriodic( img );
+		final RandomAccessible< T > p = Views.extendPeriodic( img );
 
 		// 6.) Crop an interval of view 5.)
 
@@ -53,11 +55,12 @@ public class ViewsExample1< T extends NativeType< T > & NumericType< T >>
 		final UnsignedByteType axisValue = new UnsignedByteType( 0 );
 		final ViewsExample1< UnsignedByteType > v = new ViewsExample1<>( 400, 300, backgroundValue, axisValue );
 
-		final ImgFactory< UnsignedByteType > factory = new ArrayImgFactory<>();
-		final Img< UnsignedByteType > img = IO.openImgs( "images/imglib2-logo-gray-70x80-b.tif", factory, new UnsignedByteType() ).get( 0 ).getImg();
+		final ImgFactory< UnsignedByteType > factory = new ArrayImgFactory<>( new UnsignedByteType() );
+		final Img< UnsignedByteType > img = new ImgOpener( v.ij.context() ).openImgs( "images/imglib2-logo-gray-70x80-b.tif", factory ).get( 0 ).getImg();
 		v.example( img );
 	}
 
+	final ImageJ ij;
 	final int displayWidth;
 	final int displayHeight;
 	final T backgroundValue;
@@ -69,6 +72,8 @@ public class ViewsExample1< T extends NativeType< T > & NumericType< T >>
 		this.displayHeight = displayHeight;
 		this.backgroundValue = backgroundValue;
 		this.axisValue = axisValue;
+
+		ij = new ImageJ();
 	}
 
 	void show( final RandomAccessibleInterval< T > img, final String name )
@@ -80,12 +85,13 @@ public class ViewsExample1< T extends NativeType< T > & NumericType< T >>
 	{
 		assert img.numDimensions() == 2;
 
-		final ImgFactory< T > factory = new ArrayImgFactory<>();
-		final Img< T > outputImg = factory.create( new long[] { displayWidth, displayHeight }, backgroundValue );
+		final ImgFactory< T > factory = new ArrayImgFactory<>( backgroundValue );
+		final Img< T > outputImg = factory.create( displayWidth, displayHeight );
 		final RandomAccessibleInterval< T > output = Views.translate( outputImg, -displayWidth / 2, -displayHeight / 2 );
 		copy( img, Views.iterable( output ) );
 		Views.iterable( Views.interval( output, Intervals.createMinMax( -10, 0, 10, 0 ) ) ).forEach( t -> t.set( axisValue ) );
 		Views.iterable( Views.interval( output, Intervals.createMinMax( 0, -10, 0, 10 ) ) ).forEach( t -> t.set( axisValue ) );
 		ImageJFunctions.show( output, name );
+//		ij.ui().show( name, outputImg );
 	}
 }

@@ -1,8 +1,9 @@
 package t6converters.completed;
 
-import io.scif.img.IO;
 import io.scif.img.ImgIOException;
+import io.scif.img.ImgOpener;
 
+import net.imagej.ImageJ;
 import net.imglib2.RandomAccessibleInterval;
 import net.imglib2.converter.Converter;
 import net.imglib2.converter.Converters;
@@ -16,15 +17,16 @@ public class ConvertersExample2
 {
 	public static void main(final String[] args) throws ImgIOException
 	{
-		UnsignedByteType type = new UnsignedByteType();
-		ArrayImgFactory< UnsignedByteType > factory = new ArrayImgFactory<>();
-		RandomAccessibleInterval< UnsignedByteType > img = IO.openImgs( "images/bee-1.tif", factory, type ).get( 0 ).getImg();
+		final ImageJ ij = new ImageJ();
 
-		Converter< UnsignedByteType, FloatType > c = new RealFloatConverter<>();
-		RandomAccessibleInterval< FloatType > view = Converters.convert( img, c, new FloatType() );
+		final ArrayImgFactory< UnsignedByteType > imgFactory = new ArrayImgFactory<>( new UnsignedByteType() );
+		final RandomAccessibleInterval< UnsignedByteType > img = new ImgOpener( ij.context() ).openImgs( "images/bee-1.tif", imgFactory ).get( 0 ).getImg();
+
+		final Converter< UnsignedByteType, FloatType > c = new RealFloatConverter<>();
+		final RandomAccessibleInterval< FloatType > view = Converters.convert( img, c, new FloatType() );
 		ImageJFunctions.show( view );
 
-		RandomAccessibleInterval< FloatType > inverted = Converters.convert(
+		final RandomAccessibleInterval< FloatType > inverted = Converters.convert(
 				view,
 				new Converter< FloatType, FloatType >() {
 					@Override

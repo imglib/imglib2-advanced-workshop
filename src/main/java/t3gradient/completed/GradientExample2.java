@@ -2,8 +2,10 @@ package t3gradient.completed;
 
 import static t3gradient.completed.GradientExample1.gradient;
 
-import io.scif.img.IO;
 import io.scif.img.ImgIOException;
+import io.scif.img.ImgOpener;
+
+import net.imagej.ImageJ;
 import net.imglib2.RandomAccessible;
 import net.imglib2.RandomAccessibleInterval;
 import net.imglib2.img.Img;
@@ -16,7 +18,7 @@ import net.imglib2.view.Views;
 public class GradientExample2
 {
 	/**
-	 * Compute the partial derivatives of source every dimension.
+	 * Compute the partial derivatives of source in every dimension.
 	 *
 	 * @param source
 	 *            n dimensional source image, has to provide valid data in the
@@ -38,9 +40,10 @@ public class GradientExample2
 
 	public static void main( final String[] args ) throws ImgIOException
 	{
-		final FloatType type = new FloatType();
-		final ArrayImgFactory< FloatType > factory = new ArrayImgFactory<>();
-		final Img< FloatType > input = IO.openImgs( "images/bee-1.tif", factory, type ).get( 0 ).getImg();
+		final ImageJ ij = new ImageJ();
+
+		final ArrayImgFactory< FloatType > factory = new ArrayImgFactory<>( new FloatType() );
+		final Img< FloatType > input = new ImgOpener( ij.context() ).openImgs( "images/bee-1.tif", factory ).get( 0 ).getImg();
 		ImageJFunctions.show( input );
 
 		final int n = input.numDimensions();
@@ -48,7 +51,7 @@ public class GradientExample2
 		for ( int d = 0; d < n; ++d )
 			dim[ d ] = input.dimension( d );
 		dim[ n ] = n;
-		final Img< FloatType > gradients = factory.create( dim, type );
+		final Img< FloatType > gradients = factory.create( dim );
 
 		gradients( Views.extendBorder( input ), gradients );
 		ImageJFunctions.show( gradients );
