@@ -1,8 +1,9 @@
 package t5align;
 
-import io.scif.img.IO;
 import io.scif.img.ImgIOException;
+import io.scif.img.ImgOpener;
 
+import net.imagej.ImageJ;
 import net.imglib2.img.Img;
 import net.imglib2.img.array.ArrayImgFactory;
 import net.imglib2.img.display.imagej.ImageJFunctions;
@@ -16,14 +17,16 @@ public class AlignExample
 {
 	public static void main( final String[] args ) throws ImgIOException
 	{
-		final FloatType type = new FloatType();
-		final ArrayImgFactory< FloatType > factory = new ArrayImgFactory<>();
-		final Img< FloatType > image = IO.openImgs( "images/image-2.png", factory, type ).get( 0 ).getImg();
-		final Img< FloatType > template = IO.openImgs( "images/template.png", factory, type ).get( 0 ).getImg();
+		final ImageJ ij = new ImageJ();
 
-		Align< FloatType > align = new Align<>( template, factory );
-		AffineTransform transform = align.align( image, 500, 0.01 );
+		final ArrayImgFactory< FloatType > factory = new ArrayImgFactory<>( new FloatType() );
+		final Img< FloatType > image = new ImgOpener( ij.context() ).openImgs( "images/image-2.png", factory ).get( 0 ).getImg();
+		final Img< FloatType > template = new ImgOpener( ij.context() ).openImgs( "images/template.png", factory ).get( 0 ).getImg();
 
+		final Align< FloatType > align = new Align<>( template, factory );
+		final AffineTransform transform = align.align( image, 500, 0.01 );
+
+		ij.ui().showUI();
 		ImageJFunctions.show( template, "template" );
 		ImageJFunctions.show( image, "image" );
 		ImageJFunctions.show(

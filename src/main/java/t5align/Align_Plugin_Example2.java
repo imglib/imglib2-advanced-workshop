@@ -1,15 +1,16 @@
 package t5align;
 
-import fiji.util.gui.GenericDialogPlus;
-import ij.IJ;
-import ij.ImagePlus;
-import ij.plugin.PlugIn;
-
 import net.imglib2.RandomAccessibleInterval;
 import net.imglib2.img.array.ArrayImgFactory;
 import net.imglib2.img.display.imagej.ImageJFunctions;
 import net.imglib2.realtransform.AffineTransform;
 import net.imglib2.type.numeric.real.FloatType;
+
+import fiji.util.gui.GenericDialogPlus;
+import ij.IJ;
+import ij.ImageJ;
+import ij.ImagePlus;
+import ij.plugin.PlugIn;
 
 public class Align_Plugin_Example2 implements PlugIn
 {
@@ -44,7 +45,7 @@ public class Align_Plugin_Example2 implements PlugIn
 			return;
 		}
 
-		Align< FloatType > align = new Align<>( template, new ArrayImgFactory<>() );
+		Align< FloatType > align = new Align<>( template, new ArrayImgFactory<>( new FloatType() ) );
 		AffineTransform transform = align.align( image, maxIterations, minParameterChange );
 
 		// TODO:
@@ -69,5 +70,13 @@ public class Align_Plugin_Example2 implements PlugIn
 		default:
 			IJ.showMessage( "Image type not supported." );
 		}
+	}
+
+	public static void main( final String[] args )
+	{
+		new ImageJ();
+		IJ.openImage( "images/template.png" ).show();
+		IJ.openImage( "images/image-2.png" ).show();
+		new Align_Plugin_Example2().run( null );
 	}
 }

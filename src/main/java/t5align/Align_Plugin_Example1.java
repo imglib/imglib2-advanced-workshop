@@ -1,14 +1,15 @@
 package t5align;
 
-import fiji.util.gui.GenericDialogPlus;
-import ij.IJ;
-import ij.ImagePlus;
-import ij.plugin.PlugIn;
-
 import net.imglib2.RandomAccessibleInterval;
 import net.imglib2.img.array.ArrayImgFactory;
 import net.imglib2.realtransform.AffineTransform;
 import net.imglib2.type.numeric.real.FloatType;
+
+import fiji.util.gui.GenericDialogPlus;
+import ij.IJ;
+import ij.ImageJ;
+import ij.ImagePlus;
+import ij.plugin.PlugIn;
 
 public class Align_Plugin_Example1 implements PlugIn
 {
@@ -46,12 +47,20 @@ public class Align_Plugin_Example1 implements PlugIn
 			return;
 		}
 
-		Align< FloatType > align = new Align<>( template, new ArrayImgFactory<>() );
+		Align< FloatType > align = new Align<>( template, new ArrayImgFactory<>( new FloatType() ) );
 		AffineTransform transform = align.align( image, maxIterations, minParameterChange );
 
 		// TODO:
 		// 2.) Construct and show the transformed source image.
 		//     You will need to specify an interval for the transformed image --
 		//     just use the interval of the template image.
+	}
+
+	public static void main( final String[] args )
+	{
+		new ImageJ();
+		IJ.openImage( "images/template.png" ).show();
+		IJ.openImage( "images/image-2.png" ).show();
+		new Align_Plugin_Example1().run( null );
 	}
 }

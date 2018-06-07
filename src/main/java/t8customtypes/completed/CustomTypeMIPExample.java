@@ -42,8 +42,8 @@ public class CustomTypeMIPExample
 			Img< T > performSIP( final RandomAccessibleInterval< T > img )
 	{
 		final T type = Util.getTypeFromInterval( img );
-		final ListImg< T > sip = new ListImgFactory< T >()
-				.create( new long[] { img.dimension( 0 ), 1l }, type );
+		final ListImg< T > sip = new ListImgFactory<>( type )
+				.create( img.dimension( 0 ), 1l );
 
 		final ListCursor< T > outputCursor = sip.cursor();
 		final RandomAccess< T > inputRA = img.randomAccess();
@@ -83,8 +83,8 @@ public class CustomTypeMIPExample
 			Img< T > performMIP( final RandomAccessibleInterval< T > img )
 	{
 		final T type = Util.getTypeFromInterval( img );
-		final ListImg< T > mip = new ListImgFactory< T >()
-				.create( new long[] { img.dimension( 0 ), 1l }, type );
+		final ListImg< T > mip = new ListImgFactory<>( type )
+				.create( img.dimension( 0 ), 1 );
 
 		final ListCursor< T > outputCursor = mip.cursor();
 		final RandomAccess< T > inputRA = img.randomAccess();
@@ -126,8 +126,7 @@ public class CustomTypeMIPExample
 		final List< String > words = Arrays.asList( wordArray );
 
 		// ListImg is one of the only Accessible that allows storing non-proxy types.
-		final ListImg< StringType > img = new ListImgFactory< StringType >()
-				.create( new long[] { 7l, 7l }, new StringType() );
+		final ListImg< StringType > img = new ListImgFactory<>( new StringType() ).create( 7, 7 );
 		final ListCursor< StringType > cursor = img.cursor();
 		for ( final String str : words )
 		{

@@ -15,44 +15,44 @@ public class CustomTypeMIPExample
 	/**
 	 * TODO: Modify the StringType class so that this snippet below runs and
 	 * does what it says.
-	 * 
+	 *
 	 * @param args
 	 */
-	public static void main( String[] args )
+	public static void main( final String[] args )
 	{
-		Img< StringType > img = getStringImage();
+		final Img< StringType > img = getStringImage();
 
 		System.out.println( "Input image:\n\n" + toString( img, 12 ) );
 
-		Img< StringType > mip = performMIP( img );
+		final Img< StringType > mip = performMIP( img );
 		System.out.println( "\nResult of MIP:\n\n" + toString( mip, 12 ) );
 
-		Img< StringType > sip = performSIP( img );
+		final Img< StringType > sip = performSIP( img );
 		System.out.println( "\nResult of SIP:\n\n" + toString( sip, 12 ) );
 	}
 
 	/**
 	 * Performs summation-intensity projection along the Y axis for the
 	 * specified 2D image.
-	 * 
+	 *
 	 * TODO: Replace the StringType generic parameter by the most general type
 	 * that can be used here. You might have to use generic method parameter.
-	 * 
+	 *
 	 * @param img
 	 *            the 2D input.
 	 * @return a new 1D image.
 	 */
-	private static Img< StringType > performSIP( Img< StringType > img )
+	private static Img< StringType > performSIP( final Img< StringType > img )
 	{
-		final ListImg< StringType > sip = new ListImgFactory< StringType >()
-				.create( new long[] { img.dimension( 0 ), 1l }, new StringType() );
+		final ListImg< StringType > sip = new ListImgFactory<>( new StringType() )
+				.create( img.dimension( 0 ), 1 );
 
-		ListCursor< StringType > outputCursor = sip.cursor();
-		RandomAccess< StringType > inputRA = img.randomAccess();
+		final ListCursor< StringType > outputCursor = sip.cursor();
+		final RandomAccess< StringType > inputRA = img.randomAccess();
 		while ( outputCursor.hasNext() )
 		{
 			outputCursor.fwd();
-			StringType target = outputCursor.get();
+			final StringType target = outputCursor.get();
 
 			// Initialize with empty value.
 			target.set( "" );
@@ -61,7 +61,7 @@ public class CustomTypeMIPExample
 			for ( int y = 0; y < img.dimension( 1 ); y++ )
 			{
 				inputRA.setPosition( y, 1 );
-				StringType st = inputRA.get();
+				final StringType st = inputRA.get();
 
 				// TODO: Write here code so that this method does properly a
 				// summation intensity projection
@@ -74,26 +74,26 @@ public class CustomTypeMIPExample
 	/**
 	 * Performs maximum-intensity projection along the Y axis for the specified
 	 * 2D image.
-	 * 
+	 *
 	 * TODO: Replace the StringType generic parameter by the most general type
 	 * that can be used here. You might have to use generic method parameter.
-	 * 
-	 * 
+	 *
+	 *
 	 * @param img
 	 *            the 2D input.
 	 * @return a new 1D image.
 	 */
-	private static Img< StringType > performMIP( Img< StringType > img )
+	private static Img< StringType > performMIP( final Img< StringType > img )
 	{
-		final ListImg< StringType > mip = new ListImgFactory< StringType >()
-				.create( new long[] { img.dimension( 0 ), 1l }, new StringType() );
+		final ListImg< StringType > mip = new ListImgFactory<>( new StringType() )
+				.create( img.dimension( 0 ), 1 );
 
-		ListCursor< StringType > outputCursor = mip.cursor();
-		RandomAccess< StringType > inputRA = img.randomAccess();
+		final ListCursor< StringType > outputCursor = mip.cursor();
+		final RandomAccess< StringType > inputRA = img.randomAccess();
 		while ( outputCursor.hasNext() )
 		{
 			outputCursor.fwd();
-			StringType target = outputCursor.get();
+			final StringType target = outputCursor.get();
 			// Initialize with very low value.
 			target.set( "" );
 
@@ -101,7 +101,7 @@ public class CustomTypeMIPExample
 			for ( int y = 0; y < img.dimension( 1 ); y++ )
 			{
 				inputRA.setPosition( y, 1 );
-				StringType st = inputRA.get();
+				final StringType st = inputRA.get();
 
 				// TODO: Write here code so that this method does properly a
 				// maximum intensity projection
@@ -114,7 +114,7 @@ public class CustomTypeMIPExample
 
 	/**
 	 * Create a 7x7 string based image.
-	 * 
+	 *
 	 * @return an image.
 	 */
 	private static Img< StringType > getStringImage()
@@ -130,8 +130,7 @@ public class CustomTypeMIPExample
 		final List< String > words = Arrays.asList( wordArray );
 
 		// ListImg is one of the only Accessible that allows storing non-proxy types.
-		final ListImg< StringType > img = new ListImgFactory< StringType >()
-				.create( new long[] { 7l, 7l }, new StringType() );
+		final ListImg< StringType > img = new ListImgFactory<>( new StringType() ).create( 7, 7 );
 		final ListCursor< StringType > cursor = img.cursor();
 		for ( final String str : words )
 		{
@@ -144,7 +143,7 @@ public class CustomTypeMIPExample
 
 	/**
 	 * Outputs an image to a string. Only valid for 2D images.
-	 * 
+	 *
 	 * @param img
 	 *            the image to print.
 	 * @param columnSize

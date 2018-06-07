@@ -3,7 +3,6 @@ package t5align;
 import static t3gradient.completed.GradientExample2.gradients;
 import static t4realviews.completed.RealViewsExample3.computeDifference;
 
-import Jama.Matrix;
 import net.imglib2.Cursor;
 import net.imglib2.RandomAccess;
 import net.imglib2.RandomAccessibleInterval;
@@ -16,6 +15,8 @@ import net.imglib2.type.numeric.RealType;
 import net.imglib2.util.LinAlgHelpers;
 import net.imglib2.util.Util;
 import net.imglib2.view.Views;
+
+import Jama.Matrix;
 
 public class Align< T extends RealType<T> >
 {
@@ -58,7 +59,6 @@ public class Align< T extends RealType<T> >
 	public Align( final RandomAccessibleInterval< T > template, final ImgFactory< T > factory )
 	{
 		this.template = template;
-		final T type = Util.getTypeFromInterval( template );
 
 		n = template.numDimensions();
 		warpFunction = new AffineWarp( n );
@@ -69,16 +69,16 @@ public class Align< T extends RealType<T> >
 		for ( int d = 0; d < n; ++d )
 			dim[ d ] = template.dimension( d );
 		dim[ n ] = n;
-		final Img< T > gradients = factory.create( dim, type );
+		final Img< T > gradients = factory.create( dim );
 		gradients( Views.extendBorder( template ), gradients );
 
 		dim[ n ] = numParameters;
-		descent = factory.create( dim, type );
+		descent = factory.create( dim );
 		computeSteepestDescents( gradients, warpFunction, descent );
 
 		Hinv = computeInverseHessian( descent );
 
-		error = factory.create( template, type );
+		error = factory.create( template );
 	}
 
 	/**

@@ -1,10 +1,5 @@
 package t5align.completed;
 
-import fiji.util.gui.GenericDialogPlus;
-import ij.IJ;
-import ij.ImagePlus;
-import ij.plugin.PlugIn;
-
 import net.imglib2.RandomAccessible;
 import net.imglib2.RandomAccessibleInterval;
 import net.imglib2.img.array.ArrayImgFactory;
@@ -15,6 +10,11 @@ import net.imglib2.realtransform.RealViews;
 import net.imglib2.type.numeric.real.FloatType;
 import net.imglib2.view.Views;
 
+import fiji.util.gui.GenericDialogPlus;
+import ij.IJ;
+import ij.ImageJ;
+import ij.ImagePlus;
+import ij.plugin.PlugIn;
 import t5align.Align;
 
 public class Align_Plugin_Example1 implements PlugIn
@@ -50,12 +50,20 @@ public class Align_Plugin_Example1 implements PlugIn
 			return;
 		}
 
-		Align< FloatType > align = new Align<>( template, new ArrayImgFactory<>() );
+		Align< FloatType > align = new Align<>( template, new ArrayImgFactory<>( new FloatType() ) );
 		AffineTransform transform = align.align( image, maxIterations, minParameterChange );
 
 		RandomAccessible< FloatType > transformed = RealViews.affine(
 				Views.interpolate( Views.extendBorder( image ), new NLinearInterpolatorFactory<>() ),
 				transform );
 		ImageJFunctions.show( Views.interval( transformed, template ), "aligned image" );
+	}
+
+	public static void main( final String[] args )
+	{
+		new ImageJ();
+		IJ.openImage( "images/template.png" ).show();
+		IJ.openImage( "images/image-2.png" ).show();
+		new Align_Plugin_Example1().run( null );
 	}
 }
